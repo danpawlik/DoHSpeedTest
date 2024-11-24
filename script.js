@@ -19,7 +19,7 @@
  */
 const checkButton = document.getElementById('checkButton');
 const editButton = document.getElementById('editButton');
-const topWebsites = ['google.com', 'youtube.com', 'facebook.com', 'amazon.com', 'yahoo.com', 'wikipedia.org', 'twitter.com', 'instagram.com', 'linkedin.com', 'netflix.com'];
+const topWebsites = ['google.com', 'youtube.com', 'facebook.com', 'amazon.com', 'yahoo.com', 'wikipedia.org', 'twitter.com', 'instagram.com', 'linkedin.com', 'netflix.com', "kotlet.pl", "redhat.com", "wp.pl", "openstack.org", "rdoproject.org", "softwarefactory-project.org"];
 // Global variable to store chart instance
 const dnsServers = [{
     name: "AdGuard", url: "https://dns.adguard-dns.com/dns-query", ips: ["94.140.14.14", "94.140.15.15"]
@@ -31,6 +31,10 @@ const dnsServers = [{
     name: "CleanBrowsing",
     url: "https://doh.cleanbrowsing.org/doh/family-filter/",
     ips: ["185.228.168.9", "185.228.169.9"]
+}, {
+    name: "Orange",
+    url: "",
+    ips: ["194.204.152.34", "194.204.159.1"]
 }, {
     name: "Cloudflare",
     url: "https://cloudflare-dns.com/dns-query",
@@ -211,14 +215,14 @@ async function performDNSTests() {
             const min = validResults[0];
             const max = validResults[validResults.length - 1];
             const median = validResults.length % 2 === 0 ? (validResults[validResults.length / 2 - 1] + validResults[validResults.length / 2]) / 2 : validResults[Math.floor(validResults.length / 2)];
-            
+
             let sum = 0;
             for (let i = 0; i < validResults.length; i++) {
                 sum += validResults[i];
             }
 
             const avg = sum / validResults.length;
-                        
+
 
             server.speed = {min, median, max, avg};
         } else {
@@ -332,7 +336,7 @@ function updateResult(server) {
 
     // Update row with basic information
     row.innerHTML = `
-        <td class="text-left py-2 px-4 dark:text-gray-300">${server.name} 
+        <td class="text-left py-2 px-4 dark:text-gray-300">${server.name}
         <span class="copy-icon" onclick="copyToClipboard('DoH Server URL: ${server.url}' + '\\n' + 'IP Addresses: ${server.ips.join(', ')}', this)">📋</span></td>
         <td class="text-center py-2 px-4 dark:text-gray-300">${server.speed.min !== 'Unavailable' ? server.speed.min.toFixed(2) : 'Unavailable'}</td>
         <td class="text-center py-2 px-4 dark:text-gray-300">${server.speed.median !== 'Unavailable' ? server.speed.median.toFixed(2) : 'Unavailable'}</td>
