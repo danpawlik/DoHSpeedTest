@@ -32,9 +32,15 @@ const dnsServers = [{
     url: "https://doh.cleanbrowsing.org/doh/family-filter/",
     ips: ["185.228.168.9", "185.228.169.9"]
 }, {
+    // that would be not fair, due it is not using DoH or DoT. Might be mostly fastes
     name: "Orange",
     url: "",
     ips: ["194.204.152.34", "194.204.159.1"]
+}, {
+    name: "AhaDNS",
+    // AhaDNS got only DoH, so bootstrap ips are just random
+    url: "https://blitz.ahadns.com/1:26",
+    ips: ["1.1.1.1", "9.9.9.9"]
 }, {
     name: "Cloudflare",
     url: "https://cloudflare-dns.com/dns-query",
